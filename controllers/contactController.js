@@ -64,13 +64,14 @@ const updateContact = asyncHandler(async (req, res) => {
 //@access Public
 const deleteContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
-  if(!contact){
+  if (!contact) {
     res.status(404);
     throw new Error("Contact not found");
   }
-  await Contact.remove();
-  res.status(200).json(contact);
+  await contact.remove();
+  res.status(204).json({ message: "Contact removed successfully" });
 });
+
 
 module.exports = {
   getContacts,
